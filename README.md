@@ -22,7 +22,7 @@ npm install vue-simplemde --save
 ## Use
 
 ``` javascript
-// 全局引用
+// Global reference
 import Vue from 'vue'
 import VueSimplemde from 'vue-simplemde'
 
@@ -30,7 +30,7 @@ Vue.use(VueSimplemde)
 ```
 
 ``` javascript
-// 单个组件内引用
+// Internal reference in a single component
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 
 export default {
@@ -41,31 +41,31 @@ export default {
 ```
 
 ## Props
-| 属性 | 类型 | 默认值 | 描述 |
+| property | type | default | describe |
 | ----| ----- | ----- | ---- |
-| value | String | 无 | 初始值，可使用v-model绑定 |
-| preview-class | String | 无 | 自定义预览样式类 |
-| autoinit | Boolean | true | 是否自动初始化 |
-| highlight | Boolean | false | 是否开启高亮 |
-| sanitize | Boolean | false | 开启后不渲染输入的html |
-| configs | Object | {} | [SimpleMDE的配置项](#configuration) |
+| value | String | None | Initial value, v-model binding can be used |
+| preview-class | String | None | Custom preview style class |
+| autoinit | Boolean | true | Automatic initialization |
+| highlight | Boolean | false | Is it open to highlight |
+| sanitize | Boolean | false | HTML that does not render input after opening |
+| configs | Object | {} | [SimpleMDE's config](#configuration) |
 
 ## Examples
 
-> 不再支持Vue1.x，可自行修改使用
+> No longer support Vue1.x, you can modify to use
 
 ``` vue
 <template>
-  <!-- 通过 v-model 控制 value -->
+  <!-- use v-model control value -->
   <markdown-editor v-model="content" ref="markdownEditor"></markdown-editor>
 
-  <!-- 通过事件控制 value -->
+  <!-- use event control value -->
   <markdown-editor :value="content" @input="handleInput"></markdown-editor>
 
-  <!-- 添加配置 -->
+  <!-- add config -->
   <markdown-editor :configs="configs"></markdown-editor>
 
-  <!-- 不自动初始化 -->
+  <!-- disable auto init -->
   <markdown-editor :autoinit="false"></markdown-editor>
 </template>
 
@@ -76,7 +76,7 @@ export default {
 <script>
   import markdownEditor from 'vue-simplemde/src/markdown-editor'
 
-  // 基础用法
+  // Base example
   export default {
     components: {
       markdownEditor
@@ -85,13 +85,13 @@ export default {
       return {
         content: '',
         configs: {
-          spellChecker: false // 禁用拼写检查
+          spellChecker: false // disable spell check
         }
       }
     }
   }
 
-  // 完整示例
+  // Complete example
   export default {
     components: {
       markdownEditor
@@ -100,8 +100,8 @@ export default {
       return {
         content: '',
         configs: {
-          status: false, // 禁用底部状态栏
-          spellChecker: false // 禁用拼写检查
+          status: false, // disable the status bar at the bottom
+          spellChecker: false // disable spell check
         }
       }
     },
@@ -114,16 +114,16 @@ export default {
       console.log(this.simplemde)
       this.simplemde.togglePreview()
 
-      // 'change'事件已经绑定，可以通过@input指定处理器
-      // 如果需要，你可以自行绑定这个列表中的其他事件: https://codemirror.net/doc/manual.html#events
+      // 'change' envent has bound, via @input attache an event listener
+      // You can attache events in this [list](https://codemirror.net/doc/manual.html#events) yourself if necessary
       this.simplemde.codemirror.on('beforeChange', (instance, changeObj) => {
         // do some things
       })
 
-      // 移除SimpleMDE，组件销毁时会自动调用
+      // remove SimpleMDE, when component destroy will invoke
       this.simplemde = null
 
-      // 一些有用的方法
+      // some useful methods
       this.$refs.markdownEditor.initialize() // init
       this.simplemde.toTextArea()
       this.simplemde.isPreviewActive() // returns boolean
@@ -143,7 +143,7 @@ export default {
 ```
 
 ## Markdown style
-> e.g. 使用Github的markdown样式
+> e.g. use Github's markdown style
 
 [github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
 
@@ -186,12 +186,12 @@ $ npm install --save highlight.js
 <style>
   @import '~simplemde/dist/simplemde.min.css';
   @import '~highlight.js/styles/atom-one-dark.css';
-  /* 高亮主题可选列表：https://github.com/isagalaev/highlight.js/tree/master/src/styles */
+  /* Highlight theme list: https://github.com/isagalaev/highlight.js/tree/master/src/styles */
 </style>
 ```
 
 ## Editor Theme ([simplemde-theme-base](https://github.com/xcatliu/simplemde-theme-base/wiki/List-of-themes))
-> e.g. 使用simplemde-theme-base主题
+> e.g. use simplemde-theme-base theme
 
 ### install
 ```
@@ -202,12 +202,12 @@ $ npm install --save simplemde-theme-base
 ``` vue
 <style>
   @import '~simplemde-theme-base/dist/simplemde-theme-base.min.css';
-  /* 无需引入simplemde.min.css */
+  /* no need import imposimplemde.min.css */
 </style>
 ```
 
 ## Configuration
-> SimpleMDE的配置
+> SimpleMD's config
 
 * [中文](doc/configuration_zh.md)
 * [English](doc/configuration_en.md)
